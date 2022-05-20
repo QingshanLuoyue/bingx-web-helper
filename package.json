@@ -12,16 +12,31 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:bingx-web-helper.helloWorld"
+    "*"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "bingx-web-helper.helloWorld",
-				"title": "Hello World"
-			}
-		]
+				"title": "bingx Hello World"
+			},
+      {
+        "command": "showImage",
+        "icon": {
+            "light": "./src/assets/img/icon-img-light.svg",
+            "dark": "./src/assets/img/icon-img-dark.svg"
+        },
+        "title": "showImage"
+      }
+		],
+    "menus": {
+      "editor/title": [{
+          "when": "resourceLangId == vue",
+          "command": "showImage",
+          "group": "navigation"
+      }]
+    }
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run package",
