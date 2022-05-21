@@ -50,22 +50,9 @@ const getI18n = function(scriptContent, isTs, fileName) {
 exports.getI18n = getI18n
 // getI18n('', false)
 
-// 手动解析 script 中的 i18n 字段
+// 1、当前组件是否有 t() 方法，解析得到前缀key
 
-// 解析
-//     import
-//     解析 i18n 中的
-//         函数：箭头函数，匿名函数，具名函数
-//         ...扩展符
-//         ...等等
+// 2、当前没有 t() 方法，则查找是否有mixin
+//   在 多个 mixin 中查到是否存在 t()，获取前缀
 
-// babel
-//     转换 import export 为 es5
-//     require 引入，得到 i18n 对象
-
-// vue compile sfc
-
-
-// 解析 i18n
-//     判断是纯对象，直接读取
-//     是外部赋值，根据赋值 key 值，去 import 查找 key 值对应的路径，读取路径获取 key 对应的对象
+// 3、若都找不到 t()，则直接使用匹配到的 t('xxx.xxx')

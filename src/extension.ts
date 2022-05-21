@@ -11,7 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "bingx-web-helper" is now active!');
 
-  // require('./module/hover/hover.js')(context) // 悬停提示
+  require('./module/hover/hover.js')(context) // 悬停提示
   require('./module/menu/example-image.js')(context) // 展示页面图片
 
 	// The command has been defined in the package.json file
