@@ -1,23 +1,21 @@
+// import Component from 'nuxt-class-component'
+// import Header from '~/bizComponents/global/header/index.vue'
+// @Component({
+//   name: 'HeaderPxToRem'
+// })
 const ts_template = `
-@Component({
-    i18n: {
-        zhCHS: {
-            shareTitle: '友信证券日内融，炒股新玩法',
-            shareDesc: '最高支持20倍杠杆，0利息，一键下单。小资本，撬动大收益！'
-        },
-        zhCHT: {
-            shareTitle: '友信證券即日孖展，炒股新玩法',
-            shareDesc: '最高支持20倍槓桿，0利息，一鍵下單。小資本，撬動大收益！'
-        },
-        en: {
-            shareTitle: 'uSMART New Concept: Day Margin',
-            shareDesc:
-                'Up to 20x Margin, 0 interest. Having large profit by small capitals!'
-        }
-    }
-})
-export default class IntroducePage extends Vue {
-    private showPage = false
+@Component
+export default class PopularizeHeaderPxToRem extends Header {
+  t(key: string, value = {}) {
+    return '' + this.$t('activity.invite.invitationgift.' + key, value)
+  }
+}
+`
+const js_template = `
+export default class PopularizeHeaderPxToRem extends Header {
+  t(key, value = {}) {
+    return '' + this.$t('activity.invite.invitationgift.' + key, value)
+  }
 }
 `
 
@@ -104,6 +102,7 @@ module.exports = {
     ObjectProperty_ObjectExpression__unable_to_parse_syntax,
     exportConstI18n__unable_to_parse_syntax,
     ts_template,
+    js_template,
     exportConstI18n,
     exportDefaultZhCHS
 }

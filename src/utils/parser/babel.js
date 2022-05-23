@@ -7,8 +7,9 @@ let generate  = require('@babel/generator').default
 let babel = require("@babel/core");
 
 function analysis(jsContent, traverseHandlers = [], isTs) {
-
+    // console.log('jsContent', jsContent)
     // 转换原始 code， 得到 AST
+    console.log('isTs', isTs)
     let result = babel.transform(jsContent, {
         ast: true,
         filename: isTs ?'file.ts' : '',
@@ -39,6 +40,9 @@ function analysis(jsContent, traverseHandlers = [], isTs) {
         //     "classProperties",
         // ]
     })
+    // console.log('ast', result.ast.program)
+    // console.log('code', result.code)
+    // console.log('ast', JSON.stringify(result.ast, null, 2))
 
     // 遍历 traverse 处理器，并执行
     traverseHandlers.forEach(traverseHandler => {
