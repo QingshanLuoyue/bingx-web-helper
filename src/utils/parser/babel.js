@@ -9,7 +9,6 @@ let babel = require("@babel/core");
 function analysis(jsContent, traverseHandlers = [], isTs) {
     // console.log('jsContent', jsContent)
     // 转换原始 code， 得到 AST
-    console.log('isTs', isTs)
     let result = babel.transform(jsContent, {
         ast: true,
         filename: isTs ?'file.ts' : '',

@@ -9,7 +9,7 @@ function traverseCodeAst(node, keyName = 't', isTs = false) {
   let targetPrev = ''
   // if (node.type === 'ClassMethod') {
   if (node.type === nodeType && node.key && node.key.name === keyName) {
-    console.log('node', node)
+    // console.log('node', node)
     // 进入当前代码 AST 节点
     // t(key: string, value = {}) {
     //   return '' + this.$t('activity.invite.invitationgift.' + key, value)
@@ -24,7 +24,7 @@ function traverseCodeAst(node, keyName = 't', isTs = false) {
     // 生成函数体的代码，并赋值给 i18nFun 变量
     const funString = generate(body)
     const funStringCode = `let i18n = function() ${funString.code}`
-    console.log('i18n string code :>> ', funStringCode)
+    // console.log('i18n string code :>> ', funStringCode)
 
     // 解析当前新的代码串，找到 i18n 前缀
     // let i18n = function() {
@@ -35,7 +35,7 @@ function traverseCodeAst(node, keyName = 't', isTs = false) {
         const funNode = funPath.node
         // this.$t('xxx.yyy.zzz' + key, value)
         if (funNode.type === 'CallExpression') {
-          console.log('inner funNode', funNode)
+          // console.log('inner funNode', funNode)
           // this.$t
           const callee = funNode.callee
 
@@ -52,7 +52,7 @@ function traverseCodeAst(node, keyName = 't', isTs = false) {
           firstParam.left.type === 'StringLiteral'
           ) {
             targetPrev = firstParam.left.value
-            console.log('targetPrev:', targetPrev)
+            // console.log('targetPrev:', targetPrev)
           }
         }
       }

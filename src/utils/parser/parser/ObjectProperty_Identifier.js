@@ -51,10 +51,6 @@ const getI18n = function(fileName) {
 
     analysis(importContent, [
         {
-            // 预处理调不能处理的语法
-            enter: removeUnableToParseSyntax()
-        },
-        {
             enter(path) {
                 let node = path.node
                 // const i18n = {} 形式

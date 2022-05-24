@@ -1,47 +1,58 @@
 // const fs = require('fs')
 // const path = require('path')
 
-const { analysis } = require('./babel');
+const { analysis } = require('./babel')
 const template = require('../parser/js-script-template/index.js')
 
 // 处理逻辑
-const getI18nPrevKey = function(scriptContent = '', keyName = 't', isTs = false, fileName = '') {
-    let prevKey = null
+const getI18nPrevKey = function (
+  scriptContent = '',
+  functionName = 't',
+  isTs = false,
+  fileName = ''
+) {
+  let prevKey = null
 
-    // 解析方法
-    let { ObjectProperty_ObjectExpression, removeUnableToParseSyntax, ObjectProperty_Identifier, ClassMethod } = require('./parser/index')
+  // 解析方法
+  const {
+    ObjectProperty_Identifier,
+    ClassMethod
+  } = require('./parser/index')
 
-
-    analysis(scriptContent, [
-        {
-            enter(path) {
-              let res = null
-              // console.log('enter :>> ', path.node);
-              if (res = ClassMethod(path, keyName, isTs)) {
-                prevKey = res
-                return
-                  // console.log('ObjectProperty_ObjectExpression i18nObj :>> ', i18nObj)
-              }
-              // else if (res = ObjectProperty_ObjectExpression(path, fileName)) {
-              //     // 去除无法识别语法
-
-              //     i18nObj = res
-              //     // console.log('ObjectProperty_ObjectExpression i18nObj :>> ', i18nObj)
-              //     return
-              // } else if (ObjectProperty_Identifier.hitEnter(path)) {
-              //     analysis(scriptContent, [
-              //         {
-              //             enter: ObjectProperty_Identifier.getImportUrl
-              //         }
-              //     ])
-              //     i18nObj = ObjectProperty_Identifier.getI18n(fileName)
-              //     // console.log('ObjectProperty_Identifier i18nObj :>> ', i18nObj)
-              //     return
-              // }
-            },
+  analysis(
+    scriptContent,
+    [
+      // 判断当前是否有重新包装 i18n,有的话提取前缀
+      {
+        enter(path) {
+          let res = null
+          if ((res = ClassMethod(path, functionName, isTs))) {
+            prevKey = res
+            return
+          }
         }
-    ], isTs)
-    return prevKey
+      },
+      // {
+      //   enter(path) {
+      //     // 如果找到 i18n 的前缀，这里不在继续寻找 mixin
+      //     if (prevKey) return
+
+      //     if (ObjectProperty_Identifier.hitEnter(path)) {
+      //       analysis(scriptContent, [
+      //         {
+      //           enter: ObjectProperty_Identifier.getImportUrl
+      //         }
+      //       ])
+      //       i18nObj = ObjectProperty_Identifier.getI18n(fileName)
+      //       // console.log('ObjectProperty_Identifier i18nObj :>> ', i18nObj)
+      //       return
+      //     }
+      //   }
+      // }
+    ],
+    isTs
+  )
+  return prevKey
 }
 exports.getI18nPrevKey = getI18nPrevKey
 // getI18nPrevKey(template.js_template, 't', false)
