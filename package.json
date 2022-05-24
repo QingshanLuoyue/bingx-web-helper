@@ -2,9 +2,9 @@
   "name": "bingx-web-helper",
 	"displayName": "bingx-web-helper",
 	"description": "",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"engines": {
-		"vscode": "^1.67.0"
+		"vscode": "^1.66.0"
 	},
   "repository": "https://github.com/QingshanLuoyue/bingx-web-helper",
   "publisher": "linjunfu",
