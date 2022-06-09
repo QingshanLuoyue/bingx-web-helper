@@ -22,18 +22,18 @@
 				"title": "bingx Hello World"
 			},
       {
-        "command": "showImage",
+        "command": "previewComponent",
         "icon": {
             "light": "./src/assets/img/icon-img-light.svg",
             "dark": "./src/assets/img/icon-img-dark.svg"
         },
-        "title": "showImage"
+        "title": "previewComponent"
       }
 		],
     "menus": {
       "editor/title": [{
           "when": "resourceLangId == vue",
-          "command": "showImage",
+          "command": "previewComponent",
           "group": "navigation"
       }]
     }
